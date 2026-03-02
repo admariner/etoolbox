@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
 
-import { useToastMessage } from "~/providers/toast-message-provider";
+import { useToastMessage } from "~/hooks/use-toast-message";
 
 import { useCsvParserStore } from "./csv-parser.store";
 import { parseCsv } from "./csv-parser.utils";
@@ -29,18 +29,18 @@ export const useCsvParse = () => {
     }
   }, [isError, error, messageApi]);
 
-  const resetParse = () => {
+  const resetCsvParseResult = () => {
     reset();
     setParseResult(null);
   };
 
   return {
-    result: data ?? null,
-    parse: mutate,
-    isParsing: isPending,
-    isParseError: isError,
-    isParseSuccess: isSuccess,
-    parseError: error,
-    resetParse,
+    csvParseResult: data ?? null,
+    parseCsv: mutate,
+    isParsingCsv: isPending,
+    isParseCsvError: isError,
+    isParseCsvSuccess: isSuccess,
+    parseCsvError: error,
+    resetCsvParseResult,
   };
 };

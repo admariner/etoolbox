@@ -7,7 +7,7 @@ import { useCallback, useEffect } from "react";
 import { ScreenContainer } from "~/components/ui/screen-container";
 import { ScreenHeader } from "~/components/ui/screen-header";
 import { useResponsive } from "~/hooks/use-responsive";
-import { useToastMessage } from "~/providers/toast-message-provider";
+import { useToastMessage } from "~/hooks/use-toast-message";
 
 import { ImageOcrImage } from "./image-ocr-image";
 import { ImageOcrResult } from "./image-ocr-result";
@@ -24,7 +24,7 @@ export const ImageOcr = () => {
 
   const { language, imageDataUrl, workerStatus, setLanguage, setImageDataUrl, clearImage } = useImageOcrStore();
 
-  const { ocrResult, runOcr, isProcessing, resetOcr } = useImageOcr();
+  const { ocrResult, runOcr, isOcrProcessing, resetOcr } = useImageOcr();
 
   const handleFileSelect = async (file: File) => {
     if (!isValidImageFile(file)) {
@@ -117,12 +117,12 @@ export const ImageOcr = () => {
         <ImageOcrToolbar
           hasImage={hasImage}
           resultText={ocrResult?.text}
-          isProcessing={isProcessing}
+          isProcessing={isOcrProcessing}
           onProcess={handleProcess}
           onClear={handleClear}
         />
 
-        <ImageOcrResult result={ocrResult} workerStatus={workerStatus} isProcessing={isProcessing} />
+        <ImageOcrResult result={ocrResult} workerStatus={workerStatus} isProcessing={isOcrProcessing} />
       </Flex>
     </ScreenContainer>
   );

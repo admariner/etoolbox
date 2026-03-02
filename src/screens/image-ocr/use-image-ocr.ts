@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
 
-import { useToastMessage } from "~/providers/toast-message-provider";
+import { useToastMessage } from "~/hooks/use-toast-message";
 
 import { useImageOcrStore } from "./image-ocr.store";
 import type { OcrContext, OcrResult, WorkerStatus } from "./image-ocr.types";
@@ -43,7 +43,7 @@ export const useImageOcr = ({ onProgress }: UseImageOcrArgs = {}) => {
   return {
     ocrResult: data ?? null,
     runOcr: mutate,
-    isProcessing: isPending,
+    isOcrProcessing: isPending,
     isOcrError: isError,
     isOcrSuccess: isSuccess,
     ocrError: error,
